@@ -1,6 +1,6 @@
-defmodule Auction do
+defmodule FriendFace do
   @moduledoc """
-  Documentation for `Auction`.
+  Documentation for `FriendFace`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Auction do
 
   ## Examples
 
-      iex> Auction.hello()
+      iex> FriendFace.hello()
       :world
 
   """
