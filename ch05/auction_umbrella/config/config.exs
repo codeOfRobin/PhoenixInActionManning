@@ -7,7 +7,6 @@
 # all use the same configuration file. If you want different
 # configurations or dependencies per app, it is best to
 # move said applications out of the umbrella.
-import Config
 
 # Sample configuration:
 #
@@ -16,3 +15,8 @@ import Config
 #       format: "$date $time [$level] $metadata$message\n",
 #       metadata: [:user_id]
 #
+
+use Mix.Config
+import_config "../apps/*/config/config.exs"
+
+config :phoenix, :json_library, Jason
