@@ -15,6 +15,13 @@ config :auction_web, AuctionWeb.Endpoint,
   render_errors: [view: AuctionWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AuctionWeb.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :auction, ecto_repos: [Auction.Repo]
+
+config :auction, Auction.Repo, database: "auction",
+  username: "test_user",
+  password: "workbox-rodeo-forecast-rectify-taxiderm",
+  hostname: "localhost",
+  port: "5432"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
