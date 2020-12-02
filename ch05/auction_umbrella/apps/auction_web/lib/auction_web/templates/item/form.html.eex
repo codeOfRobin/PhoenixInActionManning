@@ -1,10 +1,10 @@
 <%= form_for @item, @action, fn f -> %>
-<%= if @item.action do %>
-    <div class="alert alert-danger">
-      Unfortunately, there are errors in your
-      submission. Please correct them below.
-    </div>
-<% end %>
+  <%= if @item.action do %>
+      <div class="alert alert-danger">
+        Unfortunately, there are errors in your
+        submission. Please correct them below.
+      </div>
+  <% end %>
   <%= label f, :title %>
   <%= text_input f, :title %>
   <%= error_tag f, :title %>

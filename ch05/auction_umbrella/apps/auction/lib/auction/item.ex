@@ -21,7 +21,7 @@ defmodule Auction.Item do
   end
 
   defp validate(:ends_at, ends_at_date) do
-    case Date.compare(ends_at_date, Date.utc_now()) do
+    case Date.compare(ends_at_date, DateTime.utc_now()) do
       :lt -> [ends_at: "can't be in the past"]
       _ -> []
     end
