@@ -3,20 +3,29 @@ defmodule Auction.User do
   import Ecto.Changeset
 
   schema "users" do
-    field(:email, :string)
+    field(:email_address, :string)
     field(:username, :string)
     field(:password, :string, virtual: true)
     field(:hashed_password, :string)
     timestamps()
   end
 
+  def changeset(user, params \\ %{}) do
+    user
+    |> cast(params, [:username, :email_address])
+    |> validate_required([:username, :email_address, :hashed_password])
+    |> validate_length(:username, min: 3)
+    |> unique_constraint(:username)
+  end
+
   def changeset_with_password(user, params \\ %{}) do
     user
     |> cast(params, [:password])
     |> validate_required(:password)
-    |> validate_length(:password, 5)
+    |> validate_length(:password, min: 5)
     |> validate_confirmation(:password, required: true)
-    |> hash_password
+    |> hash_password()
+    |> changeset(params)
   end
 
   @spec hash_password(Ecto.Changeset.t()) :: nil
