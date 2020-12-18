@@ -28,7 +28,6 @@ defmodule Auction.User do
     |> changeset(params)
   end
 
-  @spec hash_password(Ecto.Changeset.t()) :: nil
   defp hash_password(%Ecto.Changeset{changes: %{password: password}} = changeset) do
     changeset
     |> put_change(:hashed_password, Auction.Password.hash(password))
