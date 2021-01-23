@@ -49,7 +49,7 @@ defmodule Auction do
   def insert_bid(attrs) do
     %Bid{}
     |> Bid.changeset(attrs)
-    |> @repo.insert!()
+    |> @repo.insert()
   end
 
   def get_user_by_username_and_password(username, password) do
