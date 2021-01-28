@@ -5,7 +5,8 @@ defmodule AuctionWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Auction.get_user(id)
-    render conn, "show.html", user: user
+    bids = Auction.get_bids_for_user(user)
+    render conn, "show.html", user: user, bids: bids
   end
   def new(conn, _params) do
     user = Auction.new_user()
@@ -26,7 +27,7 @@ defmodule AuctionWeb.UserController do
         |> Map.get("id")
         |> String.to_integer()
 
-      if current_user == nil || current_user != requested_user_id do
+      if current_user == nil || current_user.id != requested_user_id do
         conn
         |> put_flash(:error, "nice try, mate that's not a page for ye")
         |> redirect(to: Routes.item_path(conn, :index))
