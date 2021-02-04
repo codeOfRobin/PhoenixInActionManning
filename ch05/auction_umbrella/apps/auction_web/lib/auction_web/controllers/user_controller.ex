@@ -12,6 +12,7 @@ defmodule AuctionWeb.UserController do
     user = Auction.new_user()
     render conn, "new.html", user: user
   end
+  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"user" => user_params}) do
     case Auction.insert_user(user_params) do
       {:ok, user} -> redirect conn, to: Routes.user_path(conn, :show, user)
