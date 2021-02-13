@@ -59,6 +59,11 @@ let match = document.location.pathname.match(/\/items\/(\d+)$/)
 if (match) {
   let itemID = match[1]
   let channel = socket.channel(`item:${itemID}`, {})
+  channel.on("new_bid", data => {
+    console.log("new_bid message received", data)
+    const elem = document.getElementById("bids")
+    elem.insertAdjacentHTML("afterbegin", data.body)
+  })
   channel.join()
     .receive("ok", resp => { console.log("Joined successfully", resp) })
     .receive("error", resp => { console.log("Unable to join", resp) })
