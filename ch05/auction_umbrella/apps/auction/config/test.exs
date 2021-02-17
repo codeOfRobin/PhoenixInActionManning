@@ -7,3 +7,5 @@ config :auction, Auction.Repo,
   password: "workbox-rodeo-forecast-rectify-taxiderm",
   hostname: "localhost",
   port: "5432"
+
+config :logger, level: :info
