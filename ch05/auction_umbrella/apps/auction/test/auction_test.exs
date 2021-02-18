@@ -39,6 +39,22 @@ defmodule AuctionTest do
   end
 
   describe "insert_item/1" do
-    
+    test "adds an item to the database" do
+      count_query = from(i in Item, select: count(i.id))
+      before_count = Repo.one(count_query)
+      {:ok, _item} = Auction.insert_item(%{title: "test item"})
+      assert Repo.one(count_query) == before_count + 1
+    end
+
+    test "the Item in the database has the attributes provided" do
+      attrs = %{title: "test item", description: "test description"}
+      {:ok, item} = Auction.insert_item(attrs)
+      assert item.title == attrs.title
+      assert item.description == attrs.description
+    end
+
+    test "it returns an error on error" do
+      assert {:error, _changeset} = Auction.insert_item(%{foo: :bar})
+    end
   end
 end
